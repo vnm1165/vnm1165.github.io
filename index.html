@@ -155,9 +155,7 @@
              var trycatcherror = document.getElementById("trycatcherror");
              var successEl = document.getElementById("success");
              var contentFrame = document.getElementById("contentFrame");
-         
-             // Sanity checks
-         
+                 
              if (pl === "") {
                  submitPass.disabled = true;
                  passEl.disabled = true;
@@ -194,10 +192,10 @@
              }
          
              async function doSubmit(evt) {
-         
-         invalidPassEl.style.display = "none";
-         trycatcherror.style.display = "none";
-         successEl.style.display = "none";
+
+                 invalidPassEl.style.display = "none";
+                 trycatcherror.style.display = "none";
+                 successEl.style.display = "none";
          
                  submitPass.disabled = true;
                  passEl.disabled = true;
@@ -243,7 +241,6 @@
                  <\/script>
              `;
          
-                     // Set default iframe link targets to _top so all links break out of the iframe
                      if (decrypted.includes("<head>")) decrypted = decrypted.replace("<head>", "<head>" + basestr);
                      else if (decrypted.includes("<!DOCTYPE html>")) decrypted = decrypted.replace("<!DOCTYPE html>", "<!DOCTYPE html>" + basestr);
                      else decrypted = basestr + decrypted;
@@ -275,7 +272,6 @@
                  var keyCode = e.keyCode || e.which;
                  invalidPassEl.style.display = "none";
                  if (keyCode == "13") {
-                     // Enter pressed
                      doSubmit();
                      return false;
                  }
