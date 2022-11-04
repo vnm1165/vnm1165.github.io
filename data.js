@@ -8,7 +8,7 @@ var data = [{
     },    
     {
         link: "https://evonyguidewiki.com/en/how-to-add-skill-en/",
-        title: "Cách thêm skill"
+        title: "Cách thêm kĩ năng cho tướng"
     },        
     {
         link: "https://drive.google.com/drive/folders/1CszogpEoSvWj0OeSnZ8VemYiiaaKetEk?usp=sharing",
