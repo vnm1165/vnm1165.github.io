@@ -13,5 +13,9 @@ var data = [{
     {
         link: "https://drive.google.com/drive/folders/1CszogpEoSvWj0OeSnZ8VemYiiaaKetEk?usp=sharing",
         title: "[WAO]ththvinh27"
+    },        
+    {
+        link: "vnm1165.github.io/calc/",
+        title: "Tính nhanh RSS"
     },
 ]
