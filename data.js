@@ -15,7 +15,7 @@ var data = [{
         title: "[WAO]ththvinh27"
     },        
     {
-        link: "vnm1165.github.io/calc/",
+        link: "https://vnm1165.github.io/calc",
         title: "Tính nhanh RSS"
     },
 ]
