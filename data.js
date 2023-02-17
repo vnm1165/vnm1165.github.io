@@ -3,6 +3,10 @@ var data = [{
         title: "Evony: The King's Return GUIDE WIKI"
     },
     {
+        link: "https://evonyguidewiki.com/en/upgrade-requirements-keep-en/",
+        title: "Điều kiện nâng cấp thành trì"        
+    },
+    {
         link: "https://evonyguidewiki.com/en/how-many-troops-defeat-boss-en/",
         title: "Cần bao nhiêu quân để hạ boss"
     },    
