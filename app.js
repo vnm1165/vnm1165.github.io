@@ -1,1 +1,17 @@
-const RenderItem=e=>`<li><a href="${e.link}">${e.title}</a></li>`,sleep=e=>new Promise((t=>setTimeout(t,e)));document.addEventListener("DOMContentLoaded",(async()=>{let e=document.querySelector("body > ul.link-tree"),t="";var n,i;await(n=1e3,new Promise((e=>setTimeout(e,n))));for(let e=0;e<data.length;e++)t+=`<li><a href="${(i=data[e]).link}">${i.title}</a></li>`;e.innerHTML=t}));
+const RenderItem = (item) => {
+    return `<li><a href="${item.link}">${item.title}</a></li>`
+}
+
+const sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    let Root = document.querySelector("body > ul.link-tree");
+    let RenderData = ''
+    await sleep(1000);
+    for (let i = 0; i < data.length; i++) {
+        RenderData += RenderItem(data[i]);
+    }
+    Root.innerHTML = RenderData
+});
