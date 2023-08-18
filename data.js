@@ -19,6 +19,10 @@ var data = [{
         title: "Nâng sao cho tướng"              
     },
     {
+        link: "https://evonyguidewiki.com/en/red-equipment-combination-en/",
+        title: "Phối đồ"
+    },
+    {
         link: "https://drive.google.com/drive/folders/1CszogpEoSvWj0OeSnZ8VemYiiaaKetEk?usp=sharing",
         title: "[WAO]ththvinh27"
     },        
