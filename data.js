@@ -20,7 +20,7 @@ var data = [{
     },
     {
         link: "https://evonyguidewiki.com/en/red-equipment-combination-en/",
-        title: "Phối đồ"
+        title: "Phối đồ cho tướng"
     },
     {
         link: "https://drive.google.com/drive/folders/1CszogpEoSvWj0OeSnZ8VemYiiaaKetEk?usp=sharing",
