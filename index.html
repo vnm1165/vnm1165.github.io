@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="robots" content="noindex, nofollow">
+      <title>VNM Evony 1165</title>
+      <link rel="icon" type="image/png" href="./vnm.jpg" />
+      <style>
+         html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+         }
+         #dialogText {
+             color: white;
+             background-color: #4d88a8;
+         }
+         #dialogWrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: table;
+            background-color: #EEEEEE;
+         }
+         #dialogWrapCell {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+         }
+         #mainDialog {
+            max-width: 400px;
+            margin: 5px;
+            border: solid #AAAAAA 1px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 5px 3px #AAAAAA;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #FFFFFF;
+            overflow: hidden;
+            text-align: left;
+         }
+         #mainDialog > * {
+            padding: 10px 30px;
+         }
+         #passArea {
+            padding: 20px 30px;
+            background-color: white;
+         }
+         #passArea > * {
+            margin: 5px auto;
+         }
+         #pass {
+            width: 100%;
+            height: 30px;
+            font-size: 20px;
+         }
+         #messageWrapper {
+            float: left;
+            vertical-align: middle;
+            line-height: 30px;
+         }
+         .notifyText {
+            display: none;
+         }
+         #invalidPass {
+            color: red;
+         }
+         #success {
+            color: green;
+         }
+         #submitPass {
+             font-size: 15px;
+             border-radius: 5px;
+             background-color: #4d88a8;
+             border: none;
+             float: right;
+             cursor: pointer;
+             color: white;
+             padding: 5px;
+         }
+         #submitPass:hover {
+           color: white;
+           background: #2d4f62;
+         }
+         #contentFrame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+         }
+         #attribution {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 0.8em;
+         }
+         #attribution, #attribution a {
+            color: #999;
+         }
+         .error {
+            display: none;
+            color: red;
+         }
+        input:focus {
+           outline: none;
+        }
+      </style>
+   </head>
+   <iframe id="contentFrame" frameborder="0" allowfullscreen></iframe>
+   <div id="dialogWrap">
+      <div id="dialogWrapCell">
+         <div id="mainDialog">
+            <div id="dialogText">Cần mật khẩu để hiện thị nội dung</div>
+            <div id="passArea">
+               <p id="passwordPrompt">Mật khẩu:</p>
+               <input id="pass" type="password" name="pass" autofocus />
+               <div>
+                  <span id="messageWrapper">
+                  <span id="invalidPass" class="error">Thử lại lần nữa.</span>
+                  <span id="trycatcherror" class="error">Thử lại, đã xảy ra lỗi</span>
+                  <span id="success" class="notifyText">Thành công</span>
+                  &nbsp;
+                  </span>
+                  <button id="submitPass" type="button">Mở khoá</button>
+                  <div style="clear: both;"></div>
+               </div>
+            </div>
+            <div id="securecontext" class="error">
+               <p>
+                  Xin lỗi, nhưng bảo vệ bằng mật khẩu chỉ hoạt động qua kết nối an toàn. Vui lòng tải trang này qua HTTPS.
+               </p>
+            </div>
+            <div id="nocrypto" class="error">
+               <p>
+                  Trình duyệt web của bạn dường như đã lỗi thời. Vui lòng truy cập trang này bằng trình duyệt hiện đại.
+               </p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script>
+      (function() {
+      
+          var pl = "D3ybSfSq3QtRFX6sAZIAMpJTfa9Kwcy3faERS+JeIK/Is4QUXI2slIRwYDl8tmCI8E+39BBxugcg1vIKOmf6UOtayISkLiUIN/9eYrJ8aBWHcPtMc6MnxV0o1uDARiTKimtqPOUrVwrg1PlkIxf/l52h2uRfUy9pUPCv0eJd2GRZ/z5B9whbZb1zwWW4QK4Y8gEm2g56951CV26vRqQp6XkBe9FnFzkapx4BiG0alAkFgAeADcyKpHnXUN6LtYZuKseQvnRYf1u3F6E72KFJiRtVPx5AJFEicB9mhvTi/CWRY9G80VcC6HkpHde4r52O1BAcJ+KVLP9RIbt2XeMHJbyFgEFANadaA3Iyijf6AZc11CYda0nWhWDiFqvokqpHE62MmQ5haQ+iW6Sel6xsTeCLTiWCaa3mP10AXsap7sLyrrhX9O+GKOMJld8T1+bBuEqTvhXDbBaSEj2u/itVGW+bJb671nd7r6lqKuZnVkQOq0/RNiecTa4bar5YdtE/T47951jqVvF+CmD1ah4ajBmiYdU/PKjnQcGsIlW23JDYeGjNCBZ7W8rKUK6akc7Kra14asumpdlEkFx3d8nU4ChqWSwe1oZU4/FyJ5h4AkxLnp/S04NSouy7qwR7Gio83C2BmaMN5p+wSiADaKWyDwvRElM7TAwHiawLaKFSFMNxsDpjTy19Y0smqQCu/Ad3HgcMlJyLp2u0Ve8timGQ7fDS5Dwtmolhg/CxEZyOSSAtgT8WnYRyHXjTmQUTX6qdmp8e3mRZW7Tr1KSbVqNaw6KVk54LVtNiZYianh7aFHqZlW9botIKX1eOk/l2hDvZj+eS5HhCDQ2HRLyyJmVf5z5U4Yaumz5MuWr+9tKcrr1wlTEz5K5Cw1vmJ4SMGOu9dKLfOJuD4St03QuNzAXaQc/Q/kjP3yE7hQM0rSm/ug+kS4wlgFDoDnGskQKRb82Ab04dF27ntZsGK5J3eoax40FyoZCSBCBalvrqJ/V3Ab7xfIgJYnvkdLN4m9fK8/sa3dcJqC69VwpuqiLPXkfATaF2bXuhbzSzbi/3a9w4v0Tkf/WjGe8rPihtT72X971AknZmTr+Zs6Q++IKdGcNGilgprgWmfvCGu1+I3oq8oVdeLG9ADo754zJUgK0MLV5wTHEbxljpFP7p5EOKPdEMJ5zqmtULYQ2t/1FJ54XlvnBS4eUJgxogMTtiN3+OIOyO87qUQ6ThtL2Wj8bqTSs5tzgBJcSc35mNQmwbV2v0CA2NtIbBu3SJFO65MI7U0wsOSioEjuMSTHI/nwBY5jaAo5qevJMzmM8DPoa/YofrSZ+fnls0wdbpzFpqedof25WCQsf2jcCyKiBNjP66ztiQCSFK9Sr+GkGYGnXOAvlIQcw9UmKWKQaDRRzd+tLzfH+b2kgKozbEHcq4H43eohhXsQD6CuyfYJDcGMETWxOvjZjyyZMQ2TbPh1xJjfy+rOgyx0sE5yY4983umZtb+sdsWA40ZpqSR5dl0LBUv+x2pQ==";
+          
+              
+             var submitPass = document.getElementById("submitPass");
+             var passEl = document.getElementById("pass");
+             var invalidPassEl = document.getElementById("invalidPass");
+             var trycatcherror = document.getElementById("trycatcherror");
+             var successEl = document.getElementById("success");
+             var contentFrame = document.getElementById("contentFrame");
+         
+             // Sanity checks
+         
+             if (pl === "") {
+                 submitPass.disabled = true;
+                 passEl.disabled = true;
+                 alert("Trang này được sử dụng với công cụ mã hóa. Nó không hoạt động độc lập.");
+                 return;
+             }
+         
+             if (!isSecureContext) {
+                 document.querySelector("#passArea").style.display = "none";
+                 document.querySelector("#securecontext").style.display = "block";
+                 return;
+             }
+         
+             if (!crypto.subtle) {
+                 document.querySelector("#passArea").style.display = "none";
+                 document.querySelector("#nocrypto").style.display = "block";
+                 return;
+             }
+         
+             function str2ab(str) {
+                 var ustr = atob(str);
+                 var buf = new ArrayBuffer(ustr.length);
+                 var bufView = new Uint8Array(buf);
+                 for (var i = 0, strLen = ustr.length; i < strLen; i++) {
+                     bufView[i] = ustr.charCodeAt(i);
+                 }
+                 return bufView;
+             }
+         
+             async function deriveKey(salt, password) {
+                 const encoder = new TextEncoder();
+                 const baseKey = await crypto.subtle.importKey("raw", encoder.encode(password), "PBKDF2", false, ["deriveKey"]);
+                 return await crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" }, baseKey, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
+             }
+         
+             async function doSubmit(evt) {
+         
+         invalidPassEl.style.display = "none";
+         trycatcherror.style.display = "none";
+         successEl.style.display = "none";
+         
+                 submitPass.disabled = true;
+                 passEl.disabled = true;
+         
+                 let iv, ciphertext, key;
+         
+                 try {
+                     var unencodedPl = str2ab(pl);
+         
+                     const salt = unencodedPl.slice(0, 32);
+                     iv = unencodedPl.slice(32, 32 + 16);
+                     ciphertext = unencodedPl.slice(32 + 16);
+         
+                     key = await deriveKey(salt, passEl.value);
+                 } catch (e) {
+                     trycatcherror.style.display = "inline";
+                     console.error(e);
+                     return;
+                 }
+         
+                 try {
+                     const decryptedArray = new Uint8Array(await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ciphertext));
+         
+                     let decrypted = new TextDecoder().decode(decryptedArray);
+         
+                     if (decrypted === "") throw "No data returned";
+                     else localStorage.setItem("key", passEl.value);
+         
+                     const basestr = '<base href="." target="_top">';
+                     const anchorfixstr = `
+                 <script>
+                     Array.from(document.links).forEach((anchor) => {
+                         const href = anchor.getAttribute("href");
+                         if (href.startsWith("#")) {
+                             anchor.addEventListener("click", function(e) {
+                                 e.preventDefault();
+                                 const targetId = this.getAttribute("href").substring(1);
+                                 const targetEl = document.getElementById(targetId);
+                                 targetEl.scrollIntoView();
+                             });
+                         }
+                     });
+                 <\/script>
+             `;
+         
+                     // Set default iframe link targets to _top so all links break out of the iframe
+                     if (decrypted.includes("<head>")) decrypted = decrypted.replace("<head>", "<head>" + basestr);
+                     else if (decrypted.includes("<!DOCTYPE html>")) decrypted = decrypted.replace("<!DOCTYPE html>", "<!DOCTYPE html>" + basestr);
+                     else decrypted = basestr + decrypted;
+         
+                     // Fix fragment links
+                     if (decrypted.includes("</body>")) decrypted = decrypted.replace("</body>", anchorfixstr + "</body>");
+                     else if (decrypted.includes("</html>")) decrypted = decrypted.replace("</html>", anchorfixstr + "</html>");
+                     else decrypted = decrypted + anchorfixstr;
+         
+                     contentFrame.srcdoc = decrypted;
+         
+                     successEl.style.display = "inline";
+                     setTimeout(function () {
+                         dialogWrap.style.display = "none";
+                     }, 1000);
+                 } catch (e) {
+                     invalidPassEl.style.display = "inline";
+                     passEl.value = "";
+                     submitPass.disabled = false;
+                     passEl.disabled = false;
+                     console.error(e);
+                     return;
+                 }
+             }
+         
+             submitPass.onclick = doSubmit;
+             passEl.onkeypress = function (e) {
+                 if (!e) e = window.event;
+                 var keyCode = e.keyCode || e.which;
+                 invalidPassEl.style.display = "none";
+                 if (keyCode == "13") {
+                     // Enter pressed
+                     doSubmit();
+                     return false;
+                 }
+             };
+         
+             document.addEventListener("DOMContentLoaded", async () => {
+                 if ("key" in localStorage && localStorage.getItem("key") !== null) {
+                     let key_value = localStorage.getItem("key");
+                     document.getElementById("pass").value = key_value;
+                     doSubmit();
+                     return false;
+                 }
+             });
+         })();
+   </script>
+   </body>
+</html>
